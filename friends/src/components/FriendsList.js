@@ -16,7 +16,6 @@ export default class FriendsList extends React.Component {
                                 <strong>{friend.name}</strong>, 35 - <span className="email">{friend.email}</span>
                             </div>
                         </div>
-                        
                     ))
                 }
             </div>
