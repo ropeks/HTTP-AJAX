@@ -1,1 +1,18 @@
+.friend {
+    margin: 10px auto;
+    text-align: center;
+    width: 300px;
+    padding: 5px;
+    border-radius: 3%;
+    color: white;
+    background-color: rgb(39, 165, 138);
+}
 
+.friend:hover {
+    cursor: pointer;
+    opacity: 0.65
+}
+
+.friend div span {
+    color: blue;
+} 

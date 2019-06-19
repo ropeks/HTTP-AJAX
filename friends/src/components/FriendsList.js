@@ -1,14 +1,24 @@
 import React from 'react';
+import '../App.css';
 
 export default class FriendsList extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     render() {
         return (
             <div>
-                friends list
+                {
+                    this.props.friends.map(friend => (
+                        <div key={friend.id} className="friend">
+                            <div>
+                                <strong>{friend.name}</strong>, 35 - <span>{friend.email}</span>
+                            </div>
+                        </div>
+                        
+                    ))
+                }
             </div>
         );
     }
