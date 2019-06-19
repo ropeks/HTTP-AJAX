@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import './friends.css';
 
 export default class FriendsList extends React.Component {
     constructor(props) {

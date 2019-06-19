@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import FriendsList from './components/FriendsList';
-import Form from './components/Form';
+import FriendsList from './components/FriendsList/FriendsList';
+import Form from './components/Form/Form';
 import './App.css';
 
 class App extends React.Component {
@@ -30,9 +30,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <div className="caption">This is my friends list:</div>
+        <div className="caption">My friends list:</div>
         <FriendsList friends={this.state.friends} />
-        <div className="caption">You can also add new friend</div>
+        <div className="caption">You can add new friends</div>
         <Form />
       </div>
     )

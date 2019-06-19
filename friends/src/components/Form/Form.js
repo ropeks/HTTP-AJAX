@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import './form.css';
 
 export default class Form extends React.Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export default class Form extends React.Component {
                     <input className="input" placeholder="name" />
                     <input className="input" placeholder="age" />
                     <input className="input" placeholder="email" />
-                    <button className="button">Add</button>
+                    <button className="button" onClick={(e) => {e.preventDefault()}}>Add</button>
                 </form>
             </div>
         )
