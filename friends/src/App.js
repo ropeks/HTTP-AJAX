@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import FriendsList from './components/FriendsList/FriendsList';
-import Form from './components/Form/Form';
+import AddForm from './components/Forms/AddForm';
+import UpdateForm from './components/Forms/UpdateForm';
 import './App.css';
 
 class App extends React.Component {
@@ -72,11 +73,12 @@ class App extends React.Component {
       <div className="app">
         <div className="caption">My friends list:</div>
         <FriendsList friends={this.state.friends} />
-        <Form 
+        <AddForm 
           newFriend={this.state.newFriend}
           change={this.onChange} 
           submit={this.onSubmit} 
         />
+        <UpdateForm friends={this.state.friends} />
       </div>
     )
   }

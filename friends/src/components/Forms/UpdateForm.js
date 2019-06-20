@@ -1,35 +1,33 @@
 import React from 'react';
 import './form.css';
 
-export default class Form extends React.Component {
+export default class UpdateForm extends React.Component {
 
     render() {
         return (
             <div className="form-container">
-                <form className="form" onSubmit={(e) => this.props.submit(e, 'addForm')}>
+                <form className="form">
                     <input  
                         name="name" 
                         className="input" 
                         placeholder="name"
-                        value={this.props.newFriend.name} 
-                        onChange={(e) => this.props.change(e, 'newFriend')} 
+                        //value={this.props.friends.name}  
                     />
                     <input 
                         name="age" 
                         className="input" 
                         placeholder="age" 
                         type="number"
-                        value={this.props.newFriend.age}
-                        onChange={(e) => this.props.change(e, 'newFriend')} 
+                        //value={this.props.friends.age}
                     />
                     <input 
                         name="email" 
                         className="input" 
                         placeholder="email" 
-                        value={this.props.newFriend.email}
-                        onChange={(e) => this.props.change(e, 'newFriend')} 
+                        //value={this.props.friends.email}
                     />
-                    <button className="button">Add</button>
+                    <button className="button">Update</button>
+                    <button className="button">Delete</button>
                 </form>
             </div>
         )
