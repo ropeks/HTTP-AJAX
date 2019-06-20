@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Route, Link, NavLink } from 'react-router-dom';
 import FriendsList from './components/FriendsList/FriendsList';
 import AddForm from './components/Forms/AddForm';
 import UpdateForm from './components/Forms/UpdateForm';
@@ -73,12 +74,26 @@ class App extends React.Component {
       <div className="app">
         <div className="caption">My friends list:</div>
         <FriendsList friends={this.state.friends} />
-        <AddForm 
-          newFriend={this.state.newFriend}
-          change={this.onChange} 
-          submit={this.onSubmit} 
+        <Route 
+          exact
+          path="/"
+          render={(props) => 
+            <AddForm 
+              {...props}
+              newFriend={this.state.newFriend}
+              change={this.onChange} 
+              submit={this.onSubmit} 
+            />
+          } 
         />
-        <UpdateForm friends={this.state.friends} />
+        <Route 
+          path="/friend"
+          render={(props) => 
+            <UpdateForm {...props} friends={this.state.friends} />
+          } 
+        />
+        
+        
       </div>
     )
   }
