@@ -112,6 +112,20 @@ class App extends React.Component {
     })
   }
 
+  deleteFriend = (id) => {
+    axios
+    .delete(`http://localhost:5000/friends/${id}`)
+    .then(response => {
+      this.props.history.replace('/');
+      this.setState({
+        friends: response.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -119,8 +133,7 @@ class App extends React.Component {
         <FriendsList 
           friends={this.state.friends} 
           friendClick={this.onFriendClick} 
-          selectedFriend={this.state.selectedFriend}
-          friendToUpdate={this.state.friendToUpdate}
+          selectedFriend={this.state.selectedFriend}        
         />
         <Route 
           exact
@@ -140,11 +153,11 @@ class App extends React.Component {
           render={(props) => 
             <UpdateForm 
               {...props} 
-              friends={this.state.friends} 
-              selectedFriend={this.state.selectedFriend} 
+              selectedFriend={this.state.selectedFriend}
               friendToUpdate={this.state.friendToUpdate}
               change={this.onChange} 
               submit={this.onSubmit}
+              delete={this.deleteFriend}
             />
           } 
         />

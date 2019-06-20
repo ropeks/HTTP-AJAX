@@ -4,14 +4,15 @@ import './form.css';
 export default class UpdateForm extends React.Component {
 
     render() {
+        const id = this.props.selectedFriend;
         return (
-            <div className="form-container" onSubmit={(event) => this.props.submit(event, 'updateForm')}>
+            <div className="form-container" onSubmit={(e) => this.props.submit(e, 'updateForm')}>
                 <form className="form">
                     <input  
                         name="name" 
                         className="input" 
                         placeholder="name"
-                        onChange={(event) => this.props.change(event, 'friendToUpdate')}
+                        onChange={(e) => this.props.change(e, 'friendToUpdate')}
                         //value={this.props.friendToUpdate.name}  
                     />
                     <input 
@@ -26,11 +27,11 @@ export default class UpdateForm extends React.Component {
                         name="email" 
                         className="input" 
                         placeholder="email"
-                        onChange={(event) => this.props.change(event, 'friendToUpdate')} 
+                        onChange={(e) => this.props.change(e, 'friendToUpdate')} 
                         //value={this.props.friendToUpdate.email}
                     />
                     <button className="button">Update</button>
-                    <button className="button">Delete</button>
+                    <button className="button" onClick={() => this.props.delete(id)}>Delete</button>
                 </form>
             </div>
         )
