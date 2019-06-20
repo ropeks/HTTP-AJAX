@@ -11,20 +11,20 @@ export default class UpdateForm extends React.Component {
                         name="name" 
                         className="input" 
                         placeholder="name"
-                        //value={this.props.friends.name}  
+                        //value={this.props.friendToUpdate.name}  
                     />
                     <input 
                         name="age" 
                         className="input" 
                         placeholder="age" 
                         type="number"
-                        //value={this.props.friends.age}
+                        //value={this.props.friendToUpdate.age}
                     />
                     <input 
                         name="email" 
                         className="input" 
                         placeholder="email" 
-                        //value={this.props.friends.email}
+                        //value={this.props.friendToUpdate.email}
                     />
                     <button className="button">Update</button>
                     <button className="button">Delete</button>

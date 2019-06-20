@@ -9,9 +9,18 @@ export default class FriendsList extends React.Component {
             <div>
                 {
                     this.props.friends.map(friend => (
-                        <NavLink key={friend.id} to={`/friend/${friend.id}`} className="nav-link" activeClassName="active">
-                                <div id={friend.id} className="friend">
-                                    <strong>{friend.name}</strong>, {friend.age} - <span className="email">{friend.email}</span>
+                        <NavLink 
+                            to={`/friend/${friend.id}`} 
+                            key={friend.id} 
+                            className="nav-link" 
+                            activeClassName={this.props.selectedFriend && 'active'}
+                        >
+                                <div id={friend.id} onClick={this.props.friendClick} className="friend">
+                                    <strong id={friend.id} >{friend.name}</strong>, 
+                                    {friend.age} - 
+                                    <span id={friend.id}  className="email">
+                                        {friend.email}
+                                    </span>
                                 </div>
                         </NavLink>
                         

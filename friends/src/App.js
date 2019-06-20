@@ -15,7 +15,9 @@ class App extends React.Component {
         name: '',
         age: '',
         email: ''
-      }
+      },
+      selectedFriend: '',
+      friendToUpdate: null
     }
   }
 
@@ -48,6 +50,27 @@ class App extends React.Component {
     console.log('item updated');
   }
 
+  onFriendClick = (e) => {
+    if (!this.state.selectedFriend) {
+      this.setState({ selectedFriend: e.target.id }, function () {
+        this.populateUpdateForm();
+      });
+    } else if (this.state.selectedFriend === e.target.id) {
+      this.setState({ selectedFriend: '' }, function () {
+        this.populateUpdateForm();
+      });
+    } else {
+      this.setState({ selectedFriend: e.target.id }, function () {
+        this.populateUpdateForm();
+      });
+    }
+  }
+
+  populateUpdateForm = () => {
+    const friend = this.state.friends.filter(friend => friend.id.toString() === this.state.selectedFriend);
+    this.setState({ friendToUpdate: friend })
+  }
+
   addFriend = () => {
     this.state.newFriend.age && 
     this.state.newFriend.name && 
@@ -73,7 +96,12 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="caption">My friends list:</div>
-        <FriendsList friends={this.state.friends} />
+        <FriendsList 
+          friends={this.state.friends} 
+          friendClick={this.onFriendClick} 
+          selectedFriend={this.state.selectedFriend}
+          friendToUpdate={this.state.friendToUpdate}
+        />
         <Route 
           exact
           path="/"
@@ -87,9 +115,13 @@ class App extends React.Component {
           } 
         />
         <Route 
-          path="/friend"
+          path="/friend/:id"
           render={(props) => 
-            <UpdateForm {...props} friends={this.state.friends} />
+            <UpdateForm 
+              {...props} 
+              friends={this.state.friends} 
+              selectedFriend={this.state.selectedFriend} 
+            />
           } 
         />
         
