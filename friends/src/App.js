@@ -57,7 +57,7 @@ class App extends React.Component {
       });
     } else if (this.state.selectedFriend === e.target.id) {
       this.setState({ selectedFriend: '' }, function () {
-        this.populateUpdateForm();
+        this.props.history.replace(`/`);
       });
     } else {
       this.setState({ selectedFriend: e.target.id }, function () {
@@ -67,8 +67,11 @@ class App extends React.Component {
   }
 
   populateUpdateForm = () => {
-    const friend = this.state.friends.filter(friend => friend.id.toString() === this.state.selectedFriend);
-    this.setState({ friendToUpdate: friend })
+    let friend = this.state.friends.filter(friend => friend.id.toString() === this.state.selectedFriend);
+    this.setState({ friendToUpdate: friend[0] }, function () {
+      this.props.history.replace(`/friend/${this.state.friendToUpdate.id}`);
+    });
+    
   }
 
   addFriend = () => {
@@ -115,17 +118,17 @@ class App extends React.Component {
           } 
         />
         <Route 
+          exact
           path="/friend/:id"
           render={(props) => 
             <UpdateForm 
               {...props} 
               friends={this.state.friends} 
               selectedFriend={this.state.selectedFriend} 
+              friendToUpdate={this.state.friendToUpdate}
             />
           } 
         />
-        
-        
       </div>
     )
   }
