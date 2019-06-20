@@ -32,6 +32,12 @@
     outline: none;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .button {
     font-weight: 700;
     margin: 10px 0 5px 0;
