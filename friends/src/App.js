@@ -47,7 +47,7 @@ class App extends React.Component {
     formName === 'addForm' &&
     this.addFriend();
     formName === 'updateForm' &&
-    console.log('item updated');
+    this.updateFriend();
   }
 
   onFriendClick = (e) => {
@@ -95,6 +95,23 @@ class App extends React.Component {
     })
   }
 
+  updateFriend = () => {
+    const friend = this.state.friendToUpdate;
+    axios
+    .put(`http://localhost:5000/friends/${friend.id}`, friend)
+    .then(response => {
+      this.props.history.replace('/');
+      this.setState({ 
+        friends: response.data,
+        selectedFriend: '',
+        friendToUpdate: null
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -126,6 +143,8 @@ class App extends React.Component {
               friends={this.state.friends} 
               selectedFriend={this.state.selectedFriend} 
               friendToUpdate={this.state.friendToUpdate}
+              change={this.onChange} 
+              submit={this.onSubmit}
             />
           } 
         />
