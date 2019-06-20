@@ -16,11 +16,8 @@ export default class FriendsList extends React.Component {
                             activeClassName={this.props.selectedFriend && 'active'}
                         >
                                 <div id={friend.id} onClick={this.props.friendClick} className="friend">
-                                    <strong id={friend.id} >{friend.name}</strong>, 
-                                    {friend.age} - 
-                                    <span id={friend.id}  className="email">
-                                        {friend.email}
-                                    </span>
+                                    <strong id={friend.id} >{friend.name}</strong>, {friend.age} -
+                                    <span id={friend.id}  className="email"> {friend.email}</span>
                                 </div>
                         </NavLink>
                         

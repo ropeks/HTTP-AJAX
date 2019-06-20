@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import FriendsList from './components/FriendsList/FriendsList';
 import AddForm from './components/Forms/AddForm';
 import UpdateForm from './components/Forms/UpdateForm';
@@ -16,8 +16,12 @@ class App extends React.Component {
         age: '',
         email: ''
       },
-      selectedFriend: '',
-      friendToUpdate: null
+      friendToUpdate: {
+        name: '',
+        age: '',
+        email: ''
+      },
+      selectedFriend: ''
     }
   }
 
@@ -71,7 +75,6 @@ class App extends React.Component {
     this.setState({ friendToUpdate: friend[0] }, function () {
       this.props.history.replace(`/friend/${this.state.friendToUpdate.id}`);
     });
-    
   }
 
   addFriend = () => {
@@ -97,6 +100,9 @@ class App extends React.Component {
 
   updateFriend = () => {
     const friend = this.state.friendToUpdate;
+    friend.age && 
+    friend.name && 
+    friend.email &&
     axios
     .put(`http://localhost:5000/friends/${friend.id}`, friend)
     .then(response => {
@@ -104,7 +110,11 @@ class App extends React.Component {
       this.setState({ 
         friends: response.data,
         selectedFriend: '',
-        friendToUpdate: null
+        friendToUpdate: {
+          name: '',
+          age: '',
+          email: ''
+        }
       })
     })
     .catch(error => {
@@ -129,38 +139,50 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <div className="caption">My friends list:</div>
-        <FriendsList 
-          friends={this.state.friends} 
-          friendClick={this.onFriendClick} 
-          selectedFriend={this.state.selectedFriend}        
-        />
-        <Route 
-          exact
-          path="/"
-          render={(props) => 
-            <AddForm 
-              {...props}
-              newFriend={this.state.newFriend}
-              change={this.onChange} 
-              submit={this.onSubmit} 
-            />
-          } 
-        />
-        <Route 
-          exact
-          path="/friend/:id"
-          render={(props) => 
-            <UpdateForm 
-              {...props} 
-              selectedFriend={this.state.selectedFriend}
-              friendToUpdate={this.state.friendToUpdate}
-              change={this.onChange} 
-              submit={this.onSubmit}
-              delete={this.deleteFriend}
-            />
-          } 
-        />
+        <Switch>
+          <Route 
+            exact
+            path="/"
+            render={(props) => 
+              <>
+                <div className="caption">My friends list:</div>
+                <FriendsList 
+                  friends={this.state.friends} 
+                  friendClick={this.onFriendClick} 
+                  selectedFriend={this.state.selectedFriend}        
+                />
+                <AddForm 
+                  {...props}
+                  newFriend={this.state.newFriend}
+                  change={this.onChange} 
+                  submit={this.onSubmit} 
+                />
+              </>
+            } 
+          />
+          <Route 
+            exact
+            path="/friend/:id"
+            render={(props) => 
+              <>
+                <div className="caption">My friends list:</div>
+                <FriendsList 
+                  friends={this.state.friends} 
+                  friendClick={this.onFriendClick} 
+                  selectedFriend={this.state.selectedFriend}        
+                />
+                <UpdateForm 
+                  {...props} 
+                  selectedFriend={this.state.selectedFriend}
+                  friendToUpdate={this.state.friendToUpdate}
+                  change={this.onChange} 
+                  submit={this.onSubmit}
+                  delete={this.deleteFriend}
+                />
+              </>
+            } 
+          />
+        </Switch>
       </div>
     )
   }

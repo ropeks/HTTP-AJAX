@@ -5,12 +5,13 @@ export default class AddForm extends React.Component {
 
     render() {
         return (
-            <div className="form-container">
+            <div className="form-container" autocomplete="off">
                 <form className="form" onSubmit={(e) => this.props.submit(e, 'addForm')}>
                     <input  
                         name="name" 
                         className="input" 
                         placeholder="name"
+                        autocomplete="off"
                         value={this.props.newFriend.name} 
                         onChange={(e) => this.props.change(e, 'newFriend')} 
                     />
@@ -19,13 +20,15 @@ export default class AddForm extends React.Component {
                         className="input" 
                         placeholder="age" 
                         type="number"
+                        autocomplete="off"
                         value={this.props.newFriend.age}
                         onChange={(e) => this.props.change(e, 'newFriend')} 
                     />
                     <input 
                         name="email" 
                         className="input" 
-                        placeholder="email" 
+                        placeholder="email"
+                        autocomplete="off" 
                         value={this.props.newFriend.email}
                         onChange={(e) => this.props.change(e, 'newFriend')} 
                     />
