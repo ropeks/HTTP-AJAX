@@ -2,36 +2,34 @@ import React from 'react';
 import './form.css';
 
 export default class Form extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
             <div className="form-container">
-                <form className="form">
+                <form className="form" onSubmit={(e) => this.props.submit(e, 'addForm')}>
                     <input  
-                        id="1" 
+                        name="name" 
                         className="input" 
                         placeholder="name"
-                        value={this.props.name} 
-                        onChange={this.props.change} 
+                        value={this.props.newFriend.name} 
+                        onChange={(e) => this.props.change(e, 'newFriend')} 
                     />
                     <input 
-                        id="2" 
+                        name="age" 
                         className="input" 
                         placeholder="age" 
-                        value={this.props.age}
-                        onChange={this.props.change} 
+                        type="number"
+                        value={this.props.newFriend.age}
+                        onChange={(e) => this.props.change(e, 'newFriend')} 
                     />
                     <input 
-                        id="3" 
+                        name="email" 
                         className="input" 
                         placeholder="email" 
-                        value={this.props.email}
-                        onChange={this.props.change} 
+                        value={this.props.newFriend.email}
+                        onChange={(e) => this.props.change(e, 'newFriend')} 
                     />
-                    <button className="button" onClick={this.props.click}>Add</button>
+                    <button className="button">Add</button>
                 </form>
             </div>
         )

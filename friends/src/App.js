@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import uuid from 'uuid';
 import FriendsList from './components/FriendsList/FriendsList';
 import Form from './components/Form/Form';
 import './App.css';
@@ -10,60 +9,62 @@ class App extends React.Component {
     super();
     this.state = {
       friends: [],
-      newName: "",
-      newAge: "",
-      newEmail: ""
+      newFriend: {
+        name: '',
+        age: '',
+        email: ''
+      }
     }
-  }
-
-  fetchData = () => {
-    axios
-      .get('http://localhost:5000/friends')
-      .then(response => {
-        this.setState({ friends: response.data });
-      })
-      .catch(error => {
-        console.log(error.message);
-      })
   }
 
   componentDidMount() {
-    this.fetchData();
+    axios
+    .get('http://localhost:5000/friends')
+    .then(response => {
+      this.setState({ friends: response.data });
+    })
+    .catch(error => {
+      console.log(error.message);
+    })
   }
 
-  changeHandler = (e) => {
-    e.target.id === "1" &&
-    this.setState({ newName: e.target.value });
-    e.target.id === "2" &&
-    this.setState({ newAge: e.target.value });
-    e.target.id === "3" &&
-    this.setState({ newEmail: e.target.value });
+  onChange = (e, sliceOfState) => {
+    e.persist();
+    this.setState(prevState => ({
+      [sliceOfState]: {
+        ...prevState[sliceOfState],
+        [e.target.name]: e.target.value
+      }
+    }));
   }
 
-  clickHandler = (e) => {
+  onSubmit = (e, formName) => {
     e.preventDefault();
+    formName === 'addForm' &&
     this.addFriend();
+    formName === 'updateForm' &&
+    console.log('item updated');
   }
 
   addFriend = () => {
-    if (this.state.newName && this.state.newAge && this.state.newEmail ) {
-      let newState = this.state.friends.slice();
-      let newFriend = { 
-        id: uuid(),
-        name: this.state.newName,
-        age: this.state.newAge,
-        email: this.state.newEmail
-      }
-      newState.push(newFriend);
-      this.setState({ 
-        friends: newState,
-        newName: "",
-        newAge: "",
-        newEmail: ""
-      });
-    } else {
-      alert('you forgot to fill something in');
-    }
+    this.state.newFriend.age && 
+    this.state.newFriend.name && 
+    this.state.newFriend.email &&
+    axios
+    .post('http://localhost:5000/friends', this.state.newFriend)
+    .then(response => {
+      this.setState({
+        friends: response.data,
+        newFriend: {
+          name: '',
+          age: '',
+          email: ''
+        }
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
 
   render() {
@@ -71,13 +72,10 @@ class App extends React.Component {
       <div className="app">
         <div className="caption">My friends list:</div>
         <FriendsList friends={this.state.friends} />
-        <div className="caption">You can add new friends</div>
         <Form 
-          name={this.state.newName}
-          age={this.state.newAge}
-          email={this.state.newEmail}
-          change={this.changeHandler} 
-          click={this.clickHandler} 
+          newFriend={this.state.newFriend}
+          change={this.onChange} 
+          submit={this.onSubmit} 
         />
       </div>
     )

@@ -2,10 +2,7 @@ import React from 'react';
 import './friends.css';
 
 export default class FriendsList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
+    
     render() {
         return (
             <div>
