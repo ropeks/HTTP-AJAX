@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Route, Link, NavLink } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import FriendsList from './components/FriendsList/FriendsList';
 import AddForm from './components/Forms/AddForm';
 import UpdateForm from './components/Forms/UpdateForm';
