@@ -1,0 +1,27 @@
+.friend {
+    text-align: center;
+    margin: 10px auto;
+    width: 300px;
+    padding: 5px;
+    border-radius: 3%;
+    color: white;
+    background-color: rgb(39, 165, 138);
+}
+
+.friend:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.email {
+    color: rgb(23, 23, 133);
+}
+
+.nav-link {
+    text-decoration: none;
+}
+
+.active .friend {
+    background-color: rgb(228, 34, 99);
+    opacity: 0.8;
+}

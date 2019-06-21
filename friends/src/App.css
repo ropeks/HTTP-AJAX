@@ -1,0 +1,11 @@
+.app {
+    width: 500px;
+    margin: 20px auto;
+}
+
+.caption {
+    display: flex;
+    justify-content: space-around;
+    font-weight: 700;
+    color: rgb(228, 34, 99);
+}
