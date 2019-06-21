@@ -7,12 +7,12 @@ export default class UpdateForm extends React.Component {
         const id = this.props.selectedFriend;
         return (
             <div className="form-container" onSubmit={(e) => this.props.submit(e, 'updateForm')}>
-                <form className="form" autocomplete="off">
+                <form className="form" autoComplete="off">
                     <input  
                         name="name" 
                         className="input" 
                         placeholder="name"
-                        autocomplete="off"
+                        autoComplete="off"
                         value={this.props.friendToUpdate.name}  
                         onChange={(e) => this.props.change(e, 'friendToUpdate')}
                     />
@@ -21,7 +21,7 @@ export default class UpdateForm extends React.Component {
                         className="input" 
                         placeholder="age" 
                         type="number"
-                        autocomplete="off"
+                        autoComplete="off"
                         value={this.props.friendToUpdate.age}
                         onChange={(event) => this.props.change(event, 'friendToUpdate')}
                     />
@@ -29,7 +29,7 @@ export default class UpdateForm extends React.Component {
                         name="email" 
                         className="input" 
                         placeholder="email"
-                        autocomplete="off"
+                        autoComplete="off"
                         value={this.props.friendToUpdate.email}
                         onChange={(e) => this.props.change(e, 'friendToUpdate')} 
                     />

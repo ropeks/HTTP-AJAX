@@ -60,7 +60,14 @@ class App extends React.Component {
         this.populateUpdateForm();
       });
     } else if (this.state.selectedFriend === e.target.id) {
-      this.setState({ selectedFriend: '' }, function () {
+      this.setState({ 
+        friendToUpdate: {
+          name: '',
+          age: '',
+          email: ''
+        },
+        selectedFriend: ''
+      }, function () {
         this.props.history.replace(`/`);
       });
     } else {
@@ -109,12 +116,12 @@ class App extends React.Component {
       this.props.history.replace('/');
       this.setState({ 
         friends: response.data,
-        selectedFriend: '',
         friendToUpdate: {
           name: '',
           age: '',
           email: ''
-        }
+        },
+        selectedFriend: ''
       })
     })
     .catch(error => {
@@ -128,7 +135,13 @@ class App extends React.Component {
     .then(response => {
       this.props.history.replace('/');
       this.setState({
-        friends: response.data
+        friends: response.data,
+        friendToUpdate: {
+          name: '',
+          age: '',
+          email: ''
+        },
+        selectedFriend: ''
       });
     })
     .catch(error => {
